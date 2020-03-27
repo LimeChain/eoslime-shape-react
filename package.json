@@ -1,0 +1,26 @@
+{
+  "name": "eoslime-shape-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --timeout 10000 ./tests/todomanager-tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LimeChain/eoslime-shape-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LimeChain/eoslime-shape-react/issues"
+  },
+  "homepage": "https://github.com/LimeChain/eoslime-shape-react#readme",
+  "dependencies": {
+    "eoslime": "1.0.2",
+    "mocha": "7.1.1"
+  }
+}
