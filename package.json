@@ -1,0 +1,26 @@
+{
+  "name": "eoslime-shape-react",
+  "version": "1.0.0",
+  "description": "Ready to use simple dApp with predefined React front-end framework and EOSLime integration.",
+  "main": "./tests/todomanager-tests.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "eoslime test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LimeChain/eoslime-shape-react.git"
+  },
+  "author": "LimeChain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LimeChain/eoslime-shape-react/issues"
+  },
+  "homepage": "https://github.com/LimeChain/eoslime-shape-react#readme",
+  "dependencies": {
+    "eoslime": "1.0.2",
+    "mocha": "7.1.1"
+  }
+}
