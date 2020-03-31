@@ -17,34 +17,34 @@ public:
     {
     }
 
-    enum e_status_option : uint8_t {
-        INITIAL = 0,
-        TODO,
-        INPROGRESS,
+    enum status_type : uint64_t {
+        BACKLOG = 0,
+        IN_PROGRESS,
+        REVIEW,
         DONE
     };
-
-    typedef uint8_t status_option;
 
     struct [[eosio::table]] todo
     {
         uint64_t id;
         string description;
-        status_option status;
+        uint64_t status;
 
         uint64_t primary_key() const { return id; }
+        uint64_t by_status() const { return status; }
     };
 
-    typedef eosio::multi_index<"todos"_n, todo> todos;
+    typedef eosio::multi_index<"todos"_n, todo,
+        eosio::indexed_by<"bystatus"_n, eosio::const_mem_fun<todo, uint64_t, &todo::by_status>>> todos;
     todos todos_table;
 
-    [[eosio::action]] void addtodo(string description);
-    [[eosio::action]] void updatetodo(uint64_t index, uint8_t status);
-    [[eosio::action]] void removetodo(uint64_t index);
+    [[eosio::action]] void add(string description);
+    [[eosio::action]] void update(uint64_t index, uint64_t status);
+    [[eosio::action]] void remove(uint64_t index);
 
-    using addtodo_action = eosio::action_wrapper<"addtodo"_n, &todomanager::addtodo>;
-    using updatetodo_action = eosio::action_wrapper<"updatetodo"_n, &todomanager::updatetodo>;
-    using removetodo_action = eosio::action_wrapper<"removetodo"_n, &todomanager::removetodo>;
+    using add_action = eosio::action_wrapper<"add"_n, &todomanager::add>;
+    using update_action = eosio::action_wrapper<"update"_n, &todomanager::update>;
+    using remove_action = eosio::action_wrapper<"remove"_n, &todomanager::remove>;
 
 };
 
