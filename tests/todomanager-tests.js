@@ -1,7 +1,7 @@
 const assert = require('assert');
 
-const TODO_MANAGER_WASM_PATH = './contracts/todomanager.wasm';
-const TODO_MANAGER_ABI_PATH = './contracts/todomanager.abi';
+const TODO_MANAGER_WASM_PATH = './compiled/todomanager.wasm';
+const TODO_MANAGER_ABI_PATH = './compiled/todomanager.abi';
 
 const DESCRIPTION = 'sample description';
 const STATUS_TYPE = { BACKLOG: 0, IN_PROGRESS: 1, REVIEW: 2, DONE: 3 }
