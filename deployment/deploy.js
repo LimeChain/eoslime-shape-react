@@ -5,25 +5,34 @@ const CONTRACT_ABI_PATH = './compiled/todomanager.abi';
 const CONFIG_FILE = 'config.json';
 
 const deploy = async function (eoslime, deployer) {
+    const alice = await eoslime.Account.createRandom();
+
     if (!deployer) {
         deployer = await eoslime.Account.createRandom();
     }
 
     await eoslime.Contract.deployOnAccount(CONTRACT_WASM_PATH, CONTRACT_ABI_PATH, deployer);
 
-    const CONFIGURATION = {
-        account: deployer.name,
-        privateKey: deployer.privateKey,
-        publicKey: deployer.publicKey
+    const configuration = {
+        contract: {
+            name: deployer.name,
+            publicKey: deployer.publicKey,
+            privateKey: deployer.privateKey,
+        },
+        alice: {
+            name: alice.name,
+            publicKey: alice.publicKey,
+            privateKey: alice.privateKey
+        }
     };
     
-    storeConfig(CONFIG_FILE, CONFIGURATION);
+    storeConfig(configuration);
 }
 
-const storeConfig = function (filename, data) {
-    const stringifiedData = JSON.stringify(data);
+const storeConfig = function (config) {
+    const configContent = JSON.stringify(config);
   
-    fs.writeFile(filename, stringifiedData, (error) => {
+    fs.writeFileSync(CONFIG_FILE, configContent, (error) => {
         if (error) {
             throw new Error(`Storing configuration failed: ${error.message}`)
         }
