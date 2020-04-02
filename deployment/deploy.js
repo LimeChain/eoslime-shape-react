@@ -32,11 +32,11 @@ const deploy = async function (eoslime, deployer) {
 const storeConfig = function (config) {
     const configContent = JSON.stringify(config);
   
-    fs.writeFileSync(CONFIG_FILE, configContent, (error) => {
-        if (error) {
-            throw new Error(`Storing configuration failed: ${error.message}`)
-        }
-    });
+    try {
+        fs.writeFileSync(CONFIG_FILE, configContent);
+    } catch (err) {
+        throw new Error(`Storing configuration failed: ${err.message}`)
+    }
 }
 
 module.exports = deploy;
