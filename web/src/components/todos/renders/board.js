@@ -3,7 +3,7 @@ import { TodoCardsHtml } from './todo-cards';
 
 export const BoardHtml = function (context) {
     return (
-        < div className="flex" >
+        < div className="flex board-container" >
             <div className="board backlog">
                 <h2>Backlog</h2>
                 {TodoCardsHtml(context, "backlog")}

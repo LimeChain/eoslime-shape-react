@@ -22,10 +22,10 @@ class TodoManager {
             status: TODO_STATES.backlog
         }
 
-        await this.todoContract.add(todoData.description);
+        const txReceipt = await this.todoContract.add(todoData.description);
         this.todosList.backlog.push(todoData);
 
-        return true;
+        return txReceipt;
     }
 
     async moveTodo (todo, inState) {
@@ -33,7 +33,7 @@ class TodoManager {
             return false;
         }
 
-        await this.todoContract.update(todo.id, TODO_STATES[inState]);
+        const txReceipt = await this.todoContract.update(todo.id, TODO_STATES[inState]);
 
         // Update todo in local todosList cache
         const todoIndex = this.todosList[todo.state].findIndex((todoElement) => todoElement.id === todo.id);
@@ -42,17 +42,17 @@ class TodoManager {
         todo.status = TODO_STATES[inState];
         todo.state = inState;
 
-        return true;
+        return txReceipt;
     }
 
     async removeTodo (todo) {
-        await this.todoContract.remove(todo.id);
+        const txReceipt = await this.todoContract.remove(todo.id);
 
         // Clear todo from local todosList cache
         const todoIndex = this.todosList[todo.state].findIndex((todoElement) => todoElement.id === todo.id);
         this.todosList[todo.state].splice(todoIndex, 1);
 
-        return true;
+        return txReceipt;
     }
 
     static async build () {

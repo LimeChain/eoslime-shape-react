@@ -7,6 +7,7 @@ import MessageComponent from './../message-component';
 
 import { BoardHtml } from './renders/board';
 import { TodoFormHtml } from './renders/todo-form';
+import { TransactionsMonitorHtml } from './renders/transactions-monitor'
 
 class TodoApplication extends MessageComponent {
 
@@ -15,6 +16,7 @@ class TodoApplication extends MessageComponent {
 		this.state = Object.assign(
 			this.state,
 			{
+				txHistory: [],
 				todoManager: null,
 				newTodoDescription: ''
 			});
@@ -39,6 +41,7 @@ class TodoApplication extends MessageComponent {
 				</div>
 				<div>
 					{BoardHtml(this)}
+					{TransactionsMonitorHtml(this)}
 				</div>
 			</div>
 		);
@@ -49,17 +52,31 @@ class TodoApplication extends MessageComponent {
 	}
 
 	async addTodo () {
-		await this.state.todoManager.addTodo(this.state.newTodoDescription);
+		const txHistory = this.state.txHistory;
+		const txReceipt = await this.state.todoManager.addTodo(this.state.newTodoDescription);
 
-		this.setState({ newTodoDescription: '' });
+		txHistory.push({
+			action: 'add',
+			id: txReceipt.transaction_id,
+			todoText: this.state.newTodoDescription,
+		});
+
+		this.setState({ txHistory, newTodoDescription: '' });
 		this.showMessage('Todo has been added successfully!', this.MESSAGE_TYPES.SUCCESS);
 	}
 
 	async moveTodo (todo, inState) {
-		const isMoved = await this.state.todoManager.moveTodo(todo, inState);
+		const txHistory = this.state.txHistory;
+		const txReceipt = await this.state.todoManager.moveTodo(todo, inState);
 
-		if (isMoved) {
-			this.setState();
+		if (txReceipt) {
+			txHistory.push({
+				action: `move ( ${inState} )`,
+				id: txReceipt.transaction_id,
+				todoText: todo.description,
+			});
+
+			this.setState({ txHistory });
 			this.showMessage('Todo has been moved successfully!', this.MESSAGE_TYPES.SUCCESS);
 		} else {
 			this.showMessage('Todo is in this state already!', this.MESSAGE_TYPES.INFO);
@@ -67,9 +84,15 @@ class TodoApplication extends MessageComponent {
 	}
 
 	async removeTodo (todo) {
-		await this.state.todoManager.removeTodo(todo);
+		const txHistory = this.state.txHistory;
+		const txReceipt = await this.state.todoManager.removeTodo(todo);
 
-		this.setState();
+		txHistory.push({
+			action: "remove",
+			id: txReceipt.transaction_id,
+			todoText: todo.description,
+		});
+		this.setState(txHistory);
 		this.showMessage("Todo has been removed successfully!", this.MESSAGE_TYPES.SUCCESS)
 	}
 }

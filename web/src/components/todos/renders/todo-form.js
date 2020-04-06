@@ -2,7 +2,7 @@ import React from 'react';
 
 export const TodoFormHtml = function (context) {
     return (
-        < div className="container" >
+        < div >
             <div className="row">
                 <div className="col">
                     <form className="form-inline justify-content-center">
