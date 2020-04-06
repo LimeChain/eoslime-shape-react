@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const CONTRACT_WASM_PATH = './compiled/todomanager.wasm';
 const CONTRACT_ABI_PATH = './compiled/todomanager.abi';
-const CONFIG_FILE = 'config.json';
+const CONFIG_FILE = './web/config.json';
 
 const deploy = async function (eoslime, deployer) {
     const alice = await eoslime.Account.createRandom();
@@ -25,14 +25,13 @@ const deploy = async function (eoslime, deployer) {
             privateKey: alice.privateKey
         }
     };
-    
+
     storeConfig(configuration);
 }
 
 const storeConfig = function (config) {
-    const configContent = JSON.stringify(config);
-  
     try {
+        const configContent = JSON.stringify(config);
         fs.writeFileSync(CONFIG_FILE, configContent);
     } catch (err) {
         throw new Error(`Storing configuration failed: ${err.message}`)
