@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const CONTRACT_WASM_PATH = './compiled/todomanager.wasm';
 const CONTRACT_ABI_PATH = './compiled/todomanager.abi';
-const CONFIG_FILE = './web/config.json';
+const CONFIG_FILE = './web/src/config.json';
 
 const deploy = async function (eoslime, deployer) {
     const alice = await eoslime.Account.createRandom();
