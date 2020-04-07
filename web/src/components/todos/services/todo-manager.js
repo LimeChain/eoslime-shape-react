@@ -82,9 +82,7 @@ class TodoManager {
 }
 
 let getTodosByState = async function (todoState) {
-    // Todo: Get recursively all todos in a state by option ...more in response
-
-    let stateTodos = await this.todoContract.todos.equal(todoState).index(2).limit(100).find();
+    const stateTodos = await this.todoContract.todos.equal(todoState).index(2).limit(100).find();
     return stateTodos;
 }
 
