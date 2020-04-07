@@ -8,6 +8,7 @@ const TODO_STATES = {
     done: 3
 };
 
+// EOSIO - Class for interacting with blockchain
 class TodoManager {
 
     constructor(todoContract, todosList) {
@@ -21,6 +22,7 @@ class TodoManager {
             description: description,
             status: TODO_STATES.backlog
         }
+
 
         const txReceipt = await this.todoContract.add(todoData.description);
         this.todosList.backlog.push(todoData);
@@ -87,3 +89,4 @@ let getTodosByState = async function (todoState) {
 }
 
 export default TodoManager;
+// EOSIO - End
