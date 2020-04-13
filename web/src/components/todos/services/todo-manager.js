@@ -23,9 +23,10 @@ class TodoManager {
             status: TODO_STATES.backlog
         }
 
-
         const txReceipt = await this.todoContract.add(todoData.description);
+
         this.todosList.backlog.push(todoData);
+        this.todosList.length++;
 
         return txReceipt;
     }
@@ -53,6 +54,7 @@ class TodoManager {
         // Clear todo from local todosList cache
         const todoIndex = this.todosList[todo.state].findIndex((todoElement) => todoElement.id === todo.id);
         this.todosList[todo.state].splice(todoIndex, 1);
+        this.todosList.length--;
 
         return txReceipt;
     }

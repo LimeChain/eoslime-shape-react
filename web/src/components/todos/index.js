@@ -56,6 +56,8 @@ class TodoApplication extends MessageComponent {
 	}
 
 	async addTodo () {
+		this.showMessage('Processing...', this.MESSAGE_TYPES.INFO);
+
 		const txHistory = this.state.txHistory;
 		const txReceipt = await this.state.todoManager.addTodo(this.state.newTodoDescription);
 
@@ -66,10 +68,13 @@ class TodoApplication extends MessageComponent {
 		});
 
 		this.setState({ txHistory, newTodoDescription: '' });
+
 		this.showMessage('Todo has been added successfully!', this.MESSAGE_TYPES.SUCCESS);
 	}
 
 	async moveTodo (todo, inState) {
+		this.showMessage('Processing...', this.MESSAGE_TYPES.INFO);
+
 		const txHistory = this.state.txHistory;
 		const txReceipt = await this.state.todoManager.moveTodo(todo, inState);
 
@@ -81,6 +86,7 @@ class TodoApplication extends MessageComponent {
 			});
 
 			this.setState({ txHistory });
+
 			this.showMessage('Todo has been moved successfully!', this.MESSAGE_TYPES.SUCCESS);
 		} else {
 			this.showMessage('Todo is in this state already!', this.MESSAGE_TYPES.INFO);
@@ -88,6 +94,8 @@ class TodoApplication extends MessageComponent {
 	}
 
 	async removeTodo (todo) {
+		this.showMessage('Processing...', this.MESSAGE_TYPES.INFO);
+
 		const txHistory = this.state.txHistory;
 		const txReceipt = await this.state.todoManager.removeTodo(todo);
 
@@ -97,6 +105,7 @@ class TodoApplication extends MessageComponent {
 			todoText: todo.description,
 		});
 		this.setState(txHistory);
+
 		this.showMessage("Todo has been removed successfully!", this.MESSAGE_TYPES.SUCCESS)
 	}
 }

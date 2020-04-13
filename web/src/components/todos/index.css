@@ -30,6 +30,11 @@ body{
   .application-title{
     text-align: center;
   }
+  .message-box{
+    position: relative;
+    height: 80px;
+    width: 100%;
+  }
   .button-backlog{
     background: transparent;
     box-shadow: none;
@@ -73,9 +78,6 @@ body{
   .flex{
     display: flex;
     flex-direction: row;
-  }
-  .board-container{
-    margin-top: 10px;
   }
   .board{
     flex: 1;
