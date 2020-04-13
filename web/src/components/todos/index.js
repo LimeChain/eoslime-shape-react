@@ -35,12 +35,16 @@ class TodoApplication extends MessageComponent {
 	render () {
 		return (
 			<div className="application">
-				<h1 className="application-title">ToDo Manager</h1>
-				<div>
-					{TodoFormHtml(this)}
+				<div className="application-body">
+					<h1 className="application-title">Simple Todos application</h1>
+					<div>
+						{TodoFormHtml(this)}
+					</div>
+					<div>
+						{BoardHtml(this)}
+					</div>
 				</div>
-				<div>
-					{BoardHtml(this)}
+				<div className="monitor-panel">
 					{TransactionsMonitorHtml(this)}
 				</div>
 			</div>
