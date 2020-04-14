@@ -1,7 +1,5 @@
 # eoslime-shape-react
 
-![](docs/DAppWithMonitor.png)
-
 The purpose of the project is to help you onboard on EOS easily by examples.
 
 Project includes
@@ -13,9 +11,11 @@ Project includes
 
 # Overview
 
+![](docs/dapp.png)
+
 The shape represents a Todo Manager dApp showing you how to connect front-end to EOS blockchain
 
-![](docs/TodoManagerMessage.png)
+![](docs/contract-service-message.png)
 
 Functionality is as simple as
 
@@ -50,7 +50,7 @@ eoslime compile
 
 ### Deploy contract
 
-![](docs/NodeosMessage.png)
+![](docs/nodeos-message.png)
 
 ```bash
 # The command will run deployment script from ./deployment folder
@@ -65,7 +65,7 @@ The script will do several things
 
 # Start
 
-![](docs/NodeosMessage.png)
+![](docs/nodeos-message.png)
 
 ```
 npm run start
@@ -74,6 +74,8 @@ npm run start
 TodoManager dApp is on http://localhost:3000/
 
 # Tests
+
+![](docs/nodeos-message.png)
 
 Check smart contract behavior by running unit tests
 
