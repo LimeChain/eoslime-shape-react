@@ -27,7 +27,7 @@ Functionality is as simple as
 
 ### Installation
 
-```
+```bash
 # Install EOSLime globaly to use the CLI
 npm install -g eoslime
 
@@ -41,9 +41,10 @@ npm install
 
 ### Compile contract
 
-```
+```bash
 # The command will read contract files from ./contracts folder
 # Output will be stored as .abi and .wasm files in ./compiled folder
+
 eoslime compile
 ```
 
@@ -51,8 +52,9 @@ eoslime compile
 
 ![](docs/NodeosMessage.png)
 
-```
+```bash
 # The command will run deployment script from ./deployment folder
+
 eoslime deploy
 ```
 The script will do several things
@@ -75,7 +77,8 @@ TodoManager dApp is on http://localhost:3000/
 
 Check smart contract behavior by running unit tests
 
-```
+```bash
 # The command will run unit tests from ./tests folder
+
 eoslime test
 ```
