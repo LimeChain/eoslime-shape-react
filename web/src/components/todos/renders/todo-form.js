@@ -11,7 +11,7 @@ export const TodoFormHtml = function (context) {
                             <input type="text" className="form-control" onChange={context.onNewTodoDescription} placeholder="Description" />
                         </div>
                     </form>
-                    <div>
+                    <div className="message-box">
                         <div className={context.state.message.class} role="alert">{context.state.message.text}</div>
                     </div>
                 </div>
