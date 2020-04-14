@@ -1,61 +1,81 @@
 # eoslime-shape-react
 
-The project is a complete and ready to use dApp with predefined React front-end and EOSLime integration. It consists of an EOS smart contract, deployment script, unit tests and a web part. The dApp represents a simple todo list, showing how to read and record a data on the blockchain through the browser. In gives a helpful example and foundation for a further development of more sophisticated dApp/s.
+![](docs/DAppWithMonitor.png)
 
-In order to get the project up and running you need to do the following steps:
+The purpose of the project is to help you onboard on EOS easily by examples.
 
-1. Install eoslime
-```
-    npm install -g eoslime
-```
+Project includes
 
-2. Download the shape (recommended is to use a new empty folder)
-```
-    eoslime shape react
-```
+* smart contract
+* deployment script
+* unit tests
+* web interface
 
-3. Get in the root project folder
-```
-    cd eoslime-shape-react
-```
+# Overview
 
-You should see the following tidy structure:
+The shape represents a Todo Manager dApp showing you how to connect front-end to EOS blockchain
 
-[screenshot of project structure]
+![](docs/TodoManagerMessage.png)
 
-4. Install the project dependencies
-```
-    npm install
-```
+Functionality is as simple as
 
-5. Start a local nodeos instance
-```
-    eoslime nodeos
-```    
+* Add a new Todo
+* Move an existing Todo
+* Remove an existing Todo
 
-6. [optional] Run the smart contract tests
-```
-    eoslime test
-```
+# Prerequisities
 
-7. Compile the smart contract
+### Installation
+
 ```
-    eoslime compile
+# Install EOSLime globaly to use the CLI
+npm install -g eoslime
+
+# Fetch the project
+eoslime shape react
+
+# Install dependencies
+cd eoslime-shape-react
+npm install
 ```
 
-8. Deploy compiled smart contract on local blockchain
-```    
-    eoslime deploy
+### Compile contract
+
+```
+# The command will read contract files from ./contracts folder
+# Output will be stored as .abi and .wasm files in ./compiled folder
+eoslime compile
 ```
 
-9. Run the web part
+### Deploy contract
+
+![](docs/NodeosMessage.png)
+
 ```
-    npm start
+# The command will run deployment script from ./deployment folder
+eoslime deploy
 ```
-Performing the command will open the browser on http://localhost:3000/
+The script will do several things
 
-[screenshot of dApp frontend]
+* Will create a random account and will deploy the contract code on it
+* Will create a random account for Alice. She will make transactions to the contract
+* Both accounts will be uploaded in .config file located at ./web/src/config.json
 
-Now you have everything you need to start using the smart contract from the React dApp. Each performed interaction with the blockchain will be displayed in the Transaction monitor, providing the following details: todo's name, action name and tx hash.
+# Start
 
-[screenshot of Transaction monitor]
+![](docs/NodeosMessage.png)
+
+```
+npm run start
+```
+
+TodoManager dApp is on http://localhost:3000/
+
+# Tests
+
+Check smart contract behavior by running unit tests
+
+```
+# The command will run unit tests from ./tests folder
+eoslime test
+```
